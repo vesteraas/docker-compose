@@ -1,0 +1,51 @@
+version: "3"
+services:
+  activemq:
+    image: webcenter/activemq:latest
+    expose:
+    - "61616"
+    ports:
+    - "61616:61616"
+    - "8161:8161"
+
+  db:
+    image: microsoft/mssql-server-linux:latest
+    ports:
+    - "1433:1433"
+    expose:
+    - "1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+      MSSQL_SA_PASSWORD: "S3cr3tpassw0rd"
+
+  producer:
+    image: no.marcello.example/producer:0.0.1-SNAPSHOT
+    environment:
+    - "SPRING_PROFILES_ACTIVE=docker"
+    - "JAVA_OPTS=-Xmx256m -Xss256k"
+    links:
+    - "activemq"
+    - "db"
+
+  consumer:
+    image: no.marcello.example/consumer:0.0.1-SNAPSHOT
+    environment:
+    - "SPRING_PROFILES_ACTIVE=docker"
+    - "JAVA_OPTS=-Xmx256m -Xss256k"
+    depends_on:
+    - "producer"
+    links:
+    - "activemq"
+    - "db"
+
+  persister:
+    image: no.marcello.example/persister:0.0.1-SNAPSHOT
+    environment:
+    - "SPRING_PROFILES_ACTIVE=docker"
+    - "JAVA_OPTS=-Xmx256m -Xss256k"
+    depends_on:
+    - "producer"
+    links:
+    - "activemq"
+    - "db"

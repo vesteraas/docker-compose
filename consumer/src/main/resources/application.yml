@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: consumer
+  datasource:
+    url: jdbc:sqlserver://localhost:1433
+    username: SA
+    password: S3cr3tpassw0rd
+    platform: mssql
+  driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServer2012Dialect
+    hibernate.use-new-id-generator-mappings: true
+    show-sql: false
+
+mq:
+  url: failover:(tcp://0.0.0.0:61616)
