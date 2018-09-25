@@ -2,22 +2,22 @@
 
 Dette prosjektet er laget for å gi en kort innføring i hvordan man kan benytte verktøyet `docker-compose`.  Vi vil se på
 hvordan `docker-compose` kan brukes kun for å kjøre f.eks. databaser i docker.  Vi vil også se hvordan vi kan kjøre både
-ActiveMQ, MSSQL og flere Spring Boot applikasjoner i docker.
+ActiveMQ, PostgreSQL og flere Spring Boot applikasjoner i docker.
 
 ## Prerequisites
 
 Du trenger følgende programvare installert:
 
-* IntelliJ IDEA
+* IntelliJ IDEA **Professional Edition**
 * Docker CE
 
 Lag en runtime-config for `docker-compose`, og pek mot `servers.yml`.  Klikk run.
 
-Lag en databasekobling i IDEA med følgende URL: `jdbc:sqlserver://localhost:1433`.  Brukernavn/passord er `SA/S3cr3tpassw0rd`.
+Lag en databasekobling i IDEA med følgende URL: `jdbc:postgresql://localhost:5432/testdb`.  Brukernavn/passord er `postgres/postgres`.
 
 ## Spring Boot applikasjoner
 
-Dette prosjektet innheholder tre Spring Boot applikasjoner, som bruker **ActiveMQ** og **MSSQL**, startet via `docker-compose`.
+Dette prosjektet innheholder tre Spring Boot applikasjoner, som bruker **ActiveMQ** og **PostgreSQL**, startet via `docker-compose`.
 Kjør opp hver av disse i IDEA, og studer loggene fra hver av applikasjonene.
 
 ### Producer
