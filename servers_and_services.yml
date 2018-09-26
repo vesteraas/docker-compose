@@ -20,6 +20,18 @@ services:
     volumes:
     - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    tty:
+      true
+    ports:
+    - "8080:80"
+    links:
+    - "db"
+
   producer:
     image: no.marcello.example/producer:0.0.1-SNAPSHOT
     environment:

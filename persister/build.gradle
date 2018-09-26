@@ -45,3 +45,5 @@ task buildDocker(type: Docker, dependsOn: build) {
 		}
 	}
 }
+
+build.finalizedBy(buildDocker)
